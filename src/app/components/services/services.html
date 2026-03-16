@@ -1,0 +1,236 @@
+<!-- ══════════════════════════════════════════
+     SECTION 1: HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__noise"></div>
+  <div class="hero__orb"></div>
+
+  <div class="wrap hero__grid">
+
+    <div class="hero__left scroll-animate fade-left">
+      <span class="eyebrow">Comprehensive Travel Solutions 🧳</span>
+      <h1 class="hero__h1">Your Gateway to<br><span class="accent">Exceptional Travel</span></h1>
+      <p class="hero__desc">
+        From ticketing to visas, hotel bookings to Hajj &amp; Umrah packages —
+        complete travel solutions with <strong>30+ years of expertise</strong>
+        and <strong>50,000+ happy travellers</strong> worldwide.
+      </p>
+
+      <div class="hero__strip">
+        <div class="hero__strip-item">
+          <strong>7+</strong><span>Core Services</span>
+        </div>
+        <div class="hero__strip-div"></div>
+        <div class="hero__strip-item">
+          <strong>50K+</strong><span>Happy Travellers</span>
+        </div>
+        <div class="hero__strip-div"></div>
+        <div class="hero__strip-item">
+          <strong>460+</strong><span>Destinations</span>
+        </div>
+      </div>
+
+      <a routerLink="/contact" class="btn-primary">Get a Free Quote →</a>
+    </div>
+
+    <div class="hero__right scroll-animate fade-right">
+      <div class="hero__img-frame">
+        <div class="hero__img-corner hero__img-corner--tl"></div>
+        <div class="hero__img-corner hero__img-corner--br"></div>
+        <img
+          src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=700&auto=format&fit=crop&q=80"
+          alt="Travel Services"
+          class="hero__img"
+        />
+        <div class="hero__img-overlay"></div>
+      </div>
+
+      <div class="hero__badge">
+        <div class="hero__badge-dot"></div>
+        <div>
+          <strong>LICENCE Certified</strong>
+          <span>Trusted Since 2005</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: CORE SERVICES
+═══════════════════════════════════════════ -->
+<section class="srv">
+  <div class="wrap">
+
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center">Our Core Services</span>
+      <h2 class="sec-h2 sec-h2--center">Everything You Need<br>for a Perfect Journey</h2>
+      <p class="sec-desc">Comprehensive travel solutions designed to make every step of your journey smooth, safe, and memorable.</p>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading-wrap" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading services…</p>
+    </div>
+
+    <!-- EMPTY -->
+    <div class="empty-state" *ngIf="!loading && coreServices.length === 0">
+      <span class="empty-icon">⚙️</span>
+      <h3>No Services Found</h3>
+      <p>No services available right now. Check back soon!</p>
+    </div>
+
+    <!-- SERVICE CARDS -->
+    <div class="srv__list" *ngIf="!loading && coreServices.length > 0">
+      <div
+        class="srv__card scroll-animate fade-up"
+        *ngFor="let s of coreServices; let i = index"
+        [style.transitionDelay]="(i * 0.09) + 's'"
+      >
+        <!-- Left: icon -->
+        <div class="srv__card-icon-wrap">
+          <span class="srv__card-icon">{{ s.icon }}</span>
+        </div>
+
+        <!-- Center: content -->
+        <div class="srv__card-body">
+          <div class="srv__card-title-row">
+            <h3 class="srv__card-title">{{ s.title }}</h3>
+            <span class="srv__card-badge" *ngIf="s.badge">{{ s.badge }}</span>
+          </div>
+          <p class="srv__card-desc">{{ s.desc }}</p>
+          <div class="srv__card-tags" *ngIf="s.tags && s.tags.length > 0">
+            <span class="srv__tag" *ngFor="let tag of s.tags">✓ {{ tag }}</span>
+          </div>
+        </div>
+
+        <!-- Right: CTA -->
+        <div class="srv__card-action">
+          <a [routerLink]="s.btnRoute" class="btn-sm">{{ s.btnLabel }}</a>
+        </div>
+
+        <!-- Hover bar -->
+        <div class="srv__card-bar"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: HOW WE SERVE YOU
+═══════════════════════════════════════════ -->
+<section class="process">
+  <div class="process__header">
+    <div class="wrap">
+      <div class="process__header-inner">
+        <div class="process__header-left">
+          <span class="eyebrow eyebrow--white">How We Serve You</span>
+          <h2 class="process__h2">From First Call<br>to Safe Return,<br><em>We've Got You</em></h2>
+        </div>
+        <div class="process__header-right">
+          <p class="process__header-desc">
+            Our streamlined process ensures your travel needs are met efficiently,
+            professionally, and with full transparency at every step.
+          </p>
+          <div class="process__header-pill">
+            <span class="process__header-pill-dot"></span>
+            4 Simple Steps · 0 Hassle
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="process__stage">
+    <div class="wrap">
+      <div class="process__cards">
+        <div
+          class="process__card scroll-animate"
+          *ngFor="let step of process; let i = index"
+          [class.process__card--alt]="i % 2 !== 0"
+          [class.fade-up]="i % 2 === 0"
+          [class.fade-down]="i % 2 !== 0"
+          [style.transitionDelay]="(i * 0.14) + 's'"
+        >
+          <div class="process__card-bar"></div>
+          <div class="process__card-num">{{ step.num }}</div>
+          <h4 class="process__card-title">{{ step.title }}</h4>
+          <p class="process__card-desc">{{ step.desc }}</p>
+          <div class="process__card-dot"></div>
+        </div>
+      </div>
+
+      <!-- Connector track between cards -->
+      <div class="process__track">
+        <div class="process__track-fill"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: WHY CHOOSE OUR SERVICES
+═══════════════════════════════════════════ -->
+<section class="why">
+  <div class="wrap">
+
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center">Why Choose Our Services</span>
+      <h2 class="sec-h2 sec-h2--center">Professional, Reliable<br>&amp; Customer-Focused</h2>
+    </div>
+
+    <div class="why__grid">
+      <div
+        class="why__card scroll-animate fade-up"
+        *ngFor="let w of whyUs; let i = index"
+        [style.transitionDelay]="(i * 0.09) + 's'"
+      >
+        <div class="why__card-bar"></div>
+        <div class="why__icon">{{ w.icon }}</div>
+        <h4 class="why__title">{{ w.title }}</h4>
+        <p class="why__desc">{{ w.desc }}</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: CTA
+═══════════════════════════════════════════ -->
+<section class="cta">
+  <div class="cta__bg-grid"></div>
+  <div class="cta__glow"></div>
+
+  <div class="wrap">
+    <div class="cta__wrap scroll-animate fade-up">
+      <div class="cta__pill">
+        <span class="cta__pill-dot"></span>
+        Ready to Start?
+      </div>
+      <h2 class="cta__h2">Ready to Start<br>Your Journey?</h2>
+      <p class="cta__sub">Contact us today to discuss your travel plans and get a personalised quote for your dream vacation.</p>
+      <div class="cta__btns">
+        <a routerLink="/contact" class="btn-primary">Book Now →</a>
+        <a href="tel:+923156262051" class="btn-wa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          📞 Call Now
+        </a>
+      </div>
+      <div class="cta__trust">
+        <span>✓ No Hidden Fees</span>
+        <span>✓ LICENCE Certified</span>
+        <span>✓ 24/7 Support</span>
+      </div>
+    </div>
+  </div>
+</section>

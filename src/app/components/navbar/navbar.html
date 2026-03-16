@@ -1,0 +1,132 @@
+<div class="nav-root">
+
+  <!-- ── MAIN HEADER ──────────────────────────── -->
+  <header class="nav-header" [class.nav-scrolled]="scrolled" [class.nav-ready]="navVisible">
+    <div class="nav-inner">
+
+      <!-- LOGO -->
+      <a routerLink="/" class="nav-logo" (click)="closeMenu()">
+        <div class="nav-logo-wrap">
+          <img src="logo.png" alt="New Pak Al-Ghani" class="nav-logo-img"/>
+          <div class="nav-logo-trail"></div>
+          <div class="nav-logo-glow"></div>
+        </div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">NEW PAK  AL-GHANI</span>
+          <span class="nav-logo-sub">TRAVEL &amp; TOURS JPS</span>
+        </div>
+      </a>
+
+      <!-- DESKTOP NAV — only links, no mobile panel here -->
+      <nav class="nav-links nav-links--desktop">
+
+        <a *ngFor="let link of navLinks; let i = index"
+           [routerLink]="link.path"
+           routerLinkActive="nav-active"
+           [routerLinkActiveOptions]="{exact: link.exact}"
+           (click)="closeMenu()"
+           class="nav-link"
+           [style.--i]="i">
+          <span class="nl-text">{{ link.label }}</span>
+          <span class="nl-bar"></span>
+          <span class="nl-dot"></span>
+        </a>
+
+        <!-- BOOK NOW -->
+        <a href="https://wa.me/923156262051"
+           target="_blank" rel="noopener"
+           class="nav-book" (click)="closeMenu()">
+          <span class="nb-shimmer"></span>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" class="nb-ico">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.309A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.952 7.952 0 01-4.049-1.107l-.29-.172-3.004.788.806-2.937-.19-.302A7.952 7.952 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+          </svg>
+          <span class="nb-label">Book Now</span>
+          <span class="nb-arrow">→</span>
+        </a>
+
+      </nav>
+
+      <!-- HAMBURGER -->
+      <button class="nav-burger"
+              (click)="toggleMenu()"
+              [class.nav-burger-open]="menuOpen"
+              aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+    <div class="nav-accent-line"></div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       MOBILE PANEL — OUTSIDE <header> on purpose!
+       The header has transform:translateY() for its
+       slide-in animation. Any position:fixed child of
+       a transformed element gets clipped to that
+       parent's size (64px) instead of the full screen.
+       Moving it here (sibling of header, child of
+       nav-root which has NO transform) fixes it.
+  ═══════════════════════════════════════════════ -->
+  <nav class="nav-mob-panel" [class.nav-mob-panel--open]="menuOpen">
+
+    <!-- TOP BAR -->
+    <div class="nav-mob-top">
+      <div class="nav-mob-brand">
+        <img src="logo.png" alt="Logo" class="nav-mob-logo"/>
+        <div class="nav-mob-brand-text">
+          <span class="nav-mob-brand-name">NEW PAK  AL-GHANI</span>
+          <span class="nav-mob-brand-sub">Travel &amp; Tours JPS</span>
+        </div>
+      </div>
+      <button (click)="closeMenu()" class="nav-mob-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- LINKS -->
+    <a *ngFor="let link of navLinks; let i = index"
+       [routerLink]="link.path"
+       routerLinkActive="nav-mob-link--active"
+       [routerLinkActiveOptions]="{exact: link.exact}"
+       (click)="closeMenu()"
+       class="nav-mob-link">
+      <span>{{ link.label }}</span>
+      <span class="nav-mob-arrow">›</span>
+    </a>
+
+    <!-- BOOK NOW -->
+    <a href="https://wa.me/923156262051"
+       target="_blank" rel="noopener"
+       class="nav-mob-book" (click)="closeMenu()">
+      <span class="nb-label">Book Now</span>
+      <span>→</span>
+    </a>
+
+    <!-- FOOTER -->
+    <div class="nav-mob-foot">
+      <div class="nav-mob-badges">
+        <span class="nav-mob-badge nav-mob-badge--green">✓ Licence Certified</span>
+        <span class="nav-mob-badge">📅 Est. 2005</span>
+        <span class="nav-mob-badge">🌍 Worldwide</span>
+      </div>
+      <a href="tel:+923484042647" class="nav-mob-phone">
+        <div class="nav-mob-phone-icon">📞</div>
+        <div class="nav-mob-phone-info">
+          <span class="nav-mob-phone-label">Call us directly</span>
+          <span class="nav-mob-phone-num">+92 315 6262051</span>
+        </div>
+      </a>
+      <p class="nav-mob-copy">© 2025 New Pak  Al-Ghani Travel &amp; Tours</p>
+    </div>
+
+  </nav>
+
+  <!-- BACKDROP -->
+  <div class="nav-backdrop"
+       [class.nav-bd-show]="menuOpen"
+       (click)="closeMenu()"></div>
+
+</div>

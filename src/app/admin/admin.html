@@ -1,0 +1,177 @@
+<div class="admin-login">
+
+  <!-- ══════════════════════════════════════
+       LEFT: Black cinematic brand panel
+  ═══════════════════════════════════════ -->
+  <div class="login-left">
+
+    <!-- Background layers -->
+    <div class="left__grid"></div>
+    <div class="left__glow"></div>
+    <div class="left__scan"></div>
+    <div class="left__watermark">✈</div>
+
+    <!-- Floating planes -->
+    <span class="left__plane left__plane--1">✈️</span>
+    <span class="left__plane left__plane--2">✈️</span>
+    <span class="left__plane left__plane--3">✈️</span>
+
+    <!-- Corner brackets -->
+    <div class="left__corner left__corner--tl"></div>
+    <div class="left__corner left__corner--tr"></div>
+    <div class="left__corner left__corner--bl"></div>
+    <div class="left__corner left__corner--br"></div>
+
+    <div class="left__inner">
+
+      <!-- Brand Logo -->
+      <div class="brand">
+        <div class="brand__logo-wrap">
+          <div class="brand__logo-ring brand__logo-ring--1"></div>
+          <div class="brand__logo-ring brand__logo-ring--2"></div>
+          <img
+            src="/logo.png"
+            alt="New Pak Al-Ghani Travel & Tours"
+            class="brand__logo-img"
+          />
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <h2 class="left__headline">
+        Secure Admin<br>
+        <span class="hl-green">Control Panel</span>
+      </h2>
+      <p class="left__desc">
+        One secure place to manage packages, destinations,
+        services &amp; customer inquiries for New Pak Al-Ghani Travel &amp; Tours.
+      </p>
+
+      <!-- Feature list -->
+      <ul class="feature-list">
+        <li class="feature-list__item">
+          <span class="feature-list__icon">📦</span>
+          Manage Travel Packages
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon">🌍</span>
+          Update Destinations
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon">⚙️</span>
+          Control Services
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon">📬</span>
+          View Customer Inquiries
+        </li>
+        <li class="feature-list__item">
+          <span class="feature-list__icon">📊</span>
+          Dashboard Statistics
+        </li>
+      </ul>
+
+      <!-- Live status -->
+      <div class="live-pill">
+        <span class="live-dot"></span>
+        System Live · Secured · LICENCE Certified
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       RIGHT: White form panel
+  ═══════════════════════════════════════ -->
+  <div class="login-right">
+
+    <!-- Background decorations -->
+    <div class="right__aurora"></div>
+    <div class="right__dots"></div>
+    <div class="right__ring"></div>
+
+    <div class="login-card">
+
+      <!-- Header -->
+      <div class="card__header">
+        <div class="card__logo">
+          <img src="/logo.png" alt="Pak New Al-Ghani" class="card__logo-img" />
+        </div>
+        <span class="card__eyebrow">Admin Access</span>
+        <h2 class="card__title">Welcome<br>Back 👋</h2>
+        <p class="card__sub">Sign in to access your secure dashboard</p>
+        <div class="card__accent"></div>
+      </div>
+
+      <!-- Error message -->
+      <div class="error-msg" *ngIf="errorMessage">
+        <span>⚠️</span> {{ errorMessage }}
+      </div>
+
+      <!-- Form -->
+      <div class="login-form">
+
+        <div class="form__group">
+          <label>Email Address <span class="req">*</span></label>
+          <div class="input-wrap">
+            <span class="inp-icon">📧</span>
+            <input
+              type="email"
+              [(ngModel)]="email"
+              placeholder="xyz@gmail.com"
+              class="form__input"
+              (keyup.enter)="login()"
+              autocomplete="email"
+            />
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label>Password <span class="req">*</span></label>
+          <div class="input-wrap">
+            <span class="inp-icon">🔒</span>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              placeholder="Enter admin password"
+              class="form__input"
+              (keyup.enter)="login()"
+              autocomplete="current-password"
+            />
+            <button type="button" class="eye-btn" (click)="showPassword = !showPassword">
+              {{ showPassword ? '🙈' : '👁️' }}
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-login" (click)="login()" [disabled]="loading">
+          <span *ngIf="!loading">
+            Login to Dashboard
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15" style="position:relative;z-index:1">
+              <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+            </svg>
+          </span>
+          <span *ngIf="loading" class="spinner-wrap">
+            <span class="dot-spinner"></span>
+            Authenticating…
+          </span>
+        </button>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="card__footer">
+        <div class="footer__brand">
+          <span class="footer__dot"></span>
+          NEW PAK AL-GHANI TRAVEL &amp; TOURS
+        </div>
+        <div class="footer__secure">
+          🔒 Firebase Auth
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

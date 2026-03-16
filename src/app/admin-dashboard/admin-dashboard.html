@@ -1,0 +1,616 @@
+<div class="shell" [class.shell--collapsed]="!sidebarOpen">
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar__top-line"></div>
+    <div class="sidebar__grid-bg"></div>
+
+    <div class="sidebar__logo">
+      <div class="sidebar__logo-mark">✈</div>
+      <div class="sidebar__logo-text">
+        <span class="sidebar__logo-name">NEW PAK AL-GHANI</span>
+        <span class="sidebar__logo-sub">Admin Console</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <span class="sidebar__section-label">Navigation</span>
+      <button
+        type="button"
+        *ngFor="let item of navItems; let i = index"
+        class="nav-item"
+        [class.nav-item--active]="activePage === item.key"
+        (click)="setPage(item.key)"
+        [style.--nav-i]="i"
+      >
+        <span class="nav-item__icon">{{ item.icon }}</span>
+        <span class="nav-item__label">{{ item.label }}</span>
+        <span class="nav-item__pip" *ngIf="activePage === item.key"></span>
+      </button>
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__av">{{ adminEmail ? adminEmail.charAt(0).toUpperCase() : 'A' }}</div>
+        <div class="sidebar__user-meta">
+          <span class="sidebar__user-role">Administrator</span>
+          <span class="sidebar__user-email">{{ adminEmail }}</span>
+        </div>
+      </div>
+      <button type="button" class="sidebar__logout" (click)="logout()" title="Sign out">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════
+       MAIN AREA
+  ═══════════════════════════════════════ -->
+  <div class="main">
+
+    <header class="topbar">
+      <button type="button" class="topbar__hamburger" (click)="sidebarOpen = !sidebarOpen">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="topbar__breadcrumb">
+        <span class="topbar__root">Admin</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12" style="opacity:.35">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+        <span class="topbar__page">{{
+          activePage === 'dashboard'    ? 'Dashboard'    :
+          activePage === 'packages'     ? 'Packages'     :
+          activePage === 'services'     ? 'Services'     :
+          activePage === 'destinations' ? 'Destinations' :
+          activePage === 'employees'    ? 'Team Members' :
+                                          'Bookings'
+        }}</span>
+      </div>
+
+      <div class="topbar__right">
+        <div class="topbar__notif" *ngIf="stats[3].value > 0" (click)="setPage('bookings')">
+          <div class="topbar__notif-dot"></div>
+          <span>{{ stats[3].value }} new</span>
+        </div>
+        <div class="topbar__av">{{ adminEmail ? adminEmail.charAt(0).toUpperCase() : 'A' }}</div>
+      </div>
+    </header>
+
+    <main class="page">
+
+      <!-- LOADING -->
+      <div class="loading-screen" *ngIf="loading">
+        <div class="loading-screen__inner">
+          <div class="loading-screen__mark">✈</div>
+          <div class="loading-screen__rings">
+            <div class="loading-screen__ring"></div>
+            <div class="loading-screen__ring loading-screen__ring--2"></div>
+          </div>
+          <p>Loading dashboard…</p>
+        </div>
+      </div>
+
+      <!-- ══════ DASHBOARD ══════ -->
+      <div *ngIf="!loading && activePage === 'dashboard'" class="page-section">
+        <div class="pg-header fade-up" style="--d:.05s">
+          <div>
+            <div class="pg-eyebrow"><span class="pg-eyebrow__dot"></span>Overview</div>
+            <h1 class="pg-title">Good day 👋</h1>
+            <p class="pg-sub">Here's what's happening at New Pak Al-Ghani Travels today.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card fade-up" *ngFor="let s of stats; let i = index" [style.--d]="(0.1 + i * 0.07) + 's'">
+            <div class="stat-card__icon-wrap">{{ s.icon }}</div>
+            <div class="stat-card__body">
+              <span class="stat-card__val">{{ s.value }}</span>
+              <span class="stat-card__lbl">{{ s.label }}</span>
+            </div>
+            <div class="stat-card__corner stat-card__corner--tl"></div>
+            <div class="stat-card__corner stat-card__corner--br"></div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="panel fade-up" style="--d:.36s">
+            <div class="panel__header">
+              <h3 class="panel__title">Quick Actions</h3>
+            </div>
+            <div class="qa-grid">
+              <button type="button" class="qa-tile" (click)="setPage('packages')">
+                <span class="qa-tile__icon">📦</span>
+                <span>Packages</span>
+                <div class="qa-tile__bar"></div>
+              </button>
+              <button type="button" class="qa-tile" (click)="setPage('destinations')">
+                <span class="qa-tile__icon">🌍</span>
+                <span>Destinations</span>
+                <div class="qa-tile__bar"></div>
+              </button>
+              <button type="button" class="qa-tile" (click)="setPage('services')">
+                <span class="qa-tile__icon">⚙️</span>
+                <span>Services</span>
+                <div class="qa-tile__bar"></div>
+              </button>
+              <button type="button" class="qa-tile" (click)="setPage('bookings')">
+                <span class="qa-tile__icon">📬</span>
+                <span>Inquiries</span>
+                <div class="qa-tile__bar"></div>
+              </button>
+              <button type="button" class="qa-tile" (click)="setPage('employees')">
+                <span class="qa-tile__icon">👥</span>
+                <span>Team</span>
+                <div class="qa-tile__bar"></div>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel fade-up" style="--d:.44s">
+            <div class="panel__header">
+              <h3 class="panel__title">Recent Inquiries</h3>
+              <button type="button" class="panel__link" (click)="setPage('bookings')">View all →</button>
+            </div>
+            <div class="empty-msg" *ngIf="recentBookings.length === 0">No inquiries yet.</div>
+            <div class="inq-list">
+              <div class="inq-row" *ngFor="let b of recentBookings">
+                <div class="inq-av">{{ b.name?.charAt(0)?.toUpperCase() || '?' }}</div>
+                <div class="inq-info">
+                  <strong>{{ b.name }}</strong>
+                  <span>{{ b.subject || 'General Inquiry' }}</span>
+                </div>
+                <span class="status-pill" [class]="'status-pill--' + (b.status || 'new')">{{ b.status || 'new' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ PACKAGES ══════ -->
+      <div *ngIf="!loading && activePage === 'packages'" class="page-section">
+        <div class="pg-header fade-up" style="--d:.05s">
+          <div>
+            <div class="pg-eyebrow"><span class="pg-eyebrow__dot"></span>Database</div>
+            <h1 class="pg-title">Packages</h1>
+            <p class="pg-sub">{{ packages.length }} packages in database</p>
+          </div>
+          <button type="button" class="btn-add" (click)="openAdd('packages')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M12 5v14M5 12h14"/></svg>
+            Add Package
+          </button>
+        </div>
+        <div class="empty-panel fade-up" style="--d:.1s" *ngIf="packages.length === 0">
+          <span class="empty-panel__icon">📦</span>
+          <p>No packages yet.</p>
+          <button type="button" class="btn-add" (click)="openAdd('packages')">Add First Package</button>
+        </div>
+        <div class="data-table fade-up" style="--d:.12s" *ngIf="packages.length > 0">
+          <table>
+            <thead><tr>
+              <th>Package</th><th>Category</th><th>Price</th><th>Duration</th><th>Actions</th>
+            </tr></thead>
+            <tbody>
+              <tr *ngFor="let p of packages; let i = index" [style.--row-i]="i">
+                <td>
+                  <div class="td-item">
+                    <div class="td-thumb" [style.backgroundImage]="p.img ? 'url(' + p.img + ')' : 'none'">
+                      <span *ngIf="!p.img">📦</span>
+                    </div>
+                    <span class="td-name">{{ p.name }}</span>
+                  </div>
+                </td>
+                <td><span class="cat-tag">{{ p.category }}</span></td>
+                <td><span class="td-price">{{ p.price }}</span></td>
+                <td><span class="td-muted">{{ p.duration }}</span></td>
+                <td><div class="row-actions">
+                  <button type="button" class="btn-row btn-row--edit" (click)="openEdit('packages', p)">Edit</button>
+                  <button type="button" class="btn-row btn-row--del"  (click)="confirmDelete('packages', p.id)">Delete</button>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════ SERVICES ══════ -->
+      <div *ngIf="!loading && activePage === 'services'" class="page-section">
+        <div class="pg-header fade-up" style="--d:.05s">
+          <div>
+            <div class="pg-eyebrow"><span class="pg-eyebrow__dot"></span>Database</div>
+            <h1 class="pg-title">Services</h1>
+            <p class="pg-sub">{{ services.length }} services in database</p>
+          </div>
+          <button type="button" class="btn-add" (click)="openAdd('services')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M12 5v14M5 12h14"/></svg>
+            Add Service
+          </button>
+        </div>
+        <div class="empty-panel fade-up" style="--d:.1s" *ngIf="services.length === 0">
+          <span class="empty-panel__icon">⚙️</span>
+          <p>No services yet.</p>
+          <button type="button" class="btn-add" (click)="openAdd('services')">Add First Service</button>
+        </div>
+        <div class="data-table fade-up" style="--d:.12s" *ngIf="services.length > 0">
+          <table>
+            <thead><tr>
+              <th>Icon</th><th>Title</th><th>Description</th><th>Tags</th><th>Actions</th>
+            </tr></thead>
+            <tbody>
+              <tr *ngFor="let s of services; let i = index" [style.--row-i]="i">
+                <td class="td-emoji">{{ s.icon }}</td>
+                <td><span class="td-bold">{{ s.title }}</span></td>
+                <td><span class="td-desc">{{ s.desc }}</span></td>
+                <td><div class="chips-row"><span class="chip" *ngFor="let t of s.tags">{{ t }}</span></div></td>
+                <td><div class="row-actions">
+                  <button type="button" class="btn-row btn-row--edit" (click)="openEdit('services', s)">Edit</button>
+                  <button type="button" class="btn-row btn-row--del"  (click)="confirmDelete('services', s.id)">Delete</button>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════ DESTINATIONS ══════ -->
+      <div *ngIf="!loading && activePage === 'destinations'" class="page-section">
+        <div class="pg-header fade-up" style="--d:.05s">
+          <div>
+            <div class="pg-eyebrow"><span class="pg-eyebrow__dot"></span>Database</div>
+            <h1 class="pg-title">Destinations</h1>
+            <p class="pg-sub">{{ destinations.length }} destinations in database</p>
+          </div>
+          <button type="button" class="btn-add" (click)="openAdd('destinations')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M12 5v14M5 12h14"/></svg>
+            Add Destination
+          </button>
+        </div>
+        <div class="empty-panel fade-up" style="--d:.1s" *ngIf="destinations.length === 0">
+          <span class="empty-panel__icon">🌍</span>
+          <p>No destinations yet.</p>
+          <button type="button" class="btn-add" (click)="openAdd('destinations')">Add First Destination</button>
+        </div>
+        <div class="dest-grid" *ngIf="destinations.length > 0">
+          <div class="dest-card fade-up" *ngFor="let d of destinations; let i = index" [style.--d]="(0.08 + i * 0.05) + 's'">
+            <div class="dest-card__img-wrap">
+              <img [src]="d.img" [alt]="d.name" class="dest-card__img" *ngIf="d.img" />
+              <div class="dest-card__no-img" *ngIf="!d.img">🌍</div>
+              <span class="dest-card__popular" *ngIf="d.popular">⭐ Popular</span>
+              <span class="dest-card__tag" *ngIf="d.tag">{{ d.tag }}</span>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__row">
+                <strong>{{ d.name }}</strong>
+                <span class="cat-tag">{{ d.category }}</span>
+              </div>
+              <div class="row-actions" style="margin-top:8px">
+                <button type="button" class="btn-row btn-row--edit" (click)="openEdit('destinations', d)">Edit</button>
+                <button type="button" class="btn-row btn-row--del"  (click)="confirmDelete('destinations', d.id)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ BOOKINGS ══════ -->
+      <div *ngIf="!loading && activePage === 'bookings'" class="page-section">
+        <div class="pg-header fade-up" style="--d:.05s">
+          <div>
+            <div class="pg-eyebrow"><span class="pg-eyebrow__dot"></span>Inbox</div>
+            <h1 class="pg-title">Bookings &amp; Inquiries</h1>
+            <p class="pg-sub">{{ bookings.length }} total · {{ stats[3].value }} unread</p>
+          </div>
+        </div>
+        <div class="empty-panel fade-up" style="--d:.1s" *ngIf="bookings.length === 0">
+          <span class="empty-panel__icon">📬</span><p>No inquiries yet.</p>
+        </div>
+        <div class="booking-stack" *ngIf="bookings.length > 0">
+          <div class="bcard fade-up"
+            *ngFor="let b of bookings; let i = index"
+            [class.bcard--new]="(b.status || 'new') === 'new'"
+            [class.bcard--read]="b.status === 'read'"
+            [class.bcard--resolved]="b.status === 'resolved'"
+            [style.--d]="(0.06 + i * 0.04) + 's'"
+          >
+            <div class="bcard__stripe"></div>
+            <div class="bcard__header">
+              <div class="bcard__av">{{ b.name?.charAt(0)?.toUpperCase() || '?' }}</div>
+              <div class="bcard__meta">
+                <strong>{{ b.name }}</strong>
+                <span>{{ b.email }}</span>
+                <span *ngIf="b.phone">{{ b.phone }}</span>
+              </div>
+              <span class="status-pill" [class]="'status-pill--' + (b.status || 'new')">{{ b.status || 'new' }}</span>
+            </div>
+            <div class="bcard__subject" *ngIf="b.subject"><strong>Subject:</strong> {{ b.subject }}</div>
+            <p class="bcard__msg">{{ b.message }}</p>
+            <div class="bcard__actions">
+              <button type="button" class="btn-status btn-status--read"
+                *ngIf="b.status !== 'read'" (click)="updateBookingStatus(b.id, 'read')">Mark Read</button>
+              <button type="button" class="btn-status btn-status--resolved"
+                *ngIf="b.status !== 'resolved'" (click)="updateBookingStatus(b.id, 'resolved')">Resolve</button>
+              <button type="button" class="btn-status btn-status--reopen"
+                *ngIf="b.status !== 'new'" (click)="updateBookingStatus(b.id, 'new')">Reopen</button>
+              <button type="button" class="btn-row btn-row--del" (click)="deleteBooking(b.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ EMPLOYEES / TEAM ══════ -->
+      <div *ngIf="!loading && activePage === 'employees'" class="page-section">
+        <div class="pg-header fade-up" style="--d:.05s">
+          <div>
+            <div class="pg-eyebrow"><span class="pg-eyebrow__dot"></span>Team Management</div>
+            <h1 class="pg-title">Team Members</h1>
+            <p class="pg-sub">{{ employees.length }} members · Manage the About page team section</p>
+          </div>
+          <button type="button" class="btn-add" (click)="openAdd('employees')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M12 5v14M5 12h14"/></svg>
+            Add Member
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-panel fade-up" style="--d:.1s" *ngIf="employees.length === 0">
+          <span class="empty-panel__icon">👥</span>
+          <p>No team members yet. Add your first team member to display on the About page.</p>
+          <button type="button" class="btn-add" (click)="openAdd('employees')">Add First Member</button>
+        </div>
+
+        <!-- Employee Cards Grid -->
+        <div class="emp-grid" *ngIf="employees.length > 0">
+          <div
+            class="emp-card fade-up"
+            *ngFor="let emp of employees; let i = index"
+            [style.--d]="(0.08 + i * 0.06) + 's'"
+          >
+            <!-- Card top: photo -->
+            <div class="emp-card__top">
+              <div class="emp-card__photo-wrap">
+                <img
+                  *ngIf="emp.img"
+                  [src]="emp.img"
+                  [alt]="emp.name"
+                  class="emp-card__photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                />
+                <div class="emp-card__photo-fallback" [style.display]="emp.img ? 'none' : 'flex'">
+                  {{ emp.name?.charAt(0)?.toUpperCase() || '?' }}
+                </div>
+              </div>
+              <div class="emp-card__order-badge">#{{ emp.order || i + 1 }}</div>
+              <div class="emp-card__accent"></div>
+            </div>
+
+            <!-- Card body -->
+            <div class="emp-card__body">
+              <h4 class="emp-card__name">{{ emp.name }}</h4>
+              <span class="emp-card__role">{{ emp.role }}</span>
+              <p class="emp-card__desc">{{ emp.desc }}</p>
+
+              <!-- Contact info if present -->
+              <div class="emp-card__contact" *ngIf="emp.email || emp.phone">
+                <span *ngIf="emp.email" class="emp-card__contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                  {{ emp.email }}
+                </span>
+                <span *ngIf="emp.phone" class="emp-card__contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                  </svg>
+                  {{ emp.phone }}
+                </span>
+              </div>
+
+              <!-- Social links if present -->
+              <div class="emp-card__socials" *ngIf="emp.linkedin || emp.instagram || emp.facebook">
+                <a *ngIf="emp.linkedin"  [href]="emp.linkedin"  target="_blank" class="emp-card__social emp-card__social--li"  title="LinkedIn">in</a>
+                <a *ngIf="emp.instagram" [href]="emp.instagram" target="_blank" class="emp-card__social emp-card__social--ig"  title="Instagram">ig</a>
+                <a *ngIf="emp.facebook"  [href]="emp.facebook"  target="_blank" class="emp-card__social emp-card__social--fb"  title="Facebook">fb</a>
+              </div>
+
+              <!-- Actions -->
+              <div class="row-actions" style="margin-top:14px">
+                <button type="button" class="btn-row btn-row--edit" (click)="openEdit('employees', emp)">Edit</button>
+                <button type="button" class="btn-row btn-row--del"  (click)="confirmDelete('employees', emp.id)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info note -->
+        <div class="emp-note fade-up" style="--d:.5s" *ngIf="employees.length > 0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          Team members are displayed on the public <strong>About</strong> page in order of their <strong>Order #</strong>. Set order numbers to control display sequence.
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ MODAL ════ -->
+<div class="overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal" [class.modal--wide]="modalSection === 'employees'" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <div>
+        <span class="modal__eyebrow">{{ modalMode === 'add' ? 'New' : 'Editing' }}</span>
+        <h3 class="modal__title">
+          {{ modalSection === 'packages' ? 'Package' :
+             modalSection === 'services' ? 'Service' :
+             modalSection === 'employees' ? 'Team Member' : 'Destination' }}
+        </h3>
+      </div>
+      <button type="button" class="modal__close" (click)="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal__body">
+
+      <!-- PACKAGE FORM -->
+      <div *ngIf="modalSection === 'packages'" class="form-grid">
+        <div class="field full"><label>Package Name <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="pkgForm.name" name="pkgName" class="f-input" placeholder="e.g. Economy Umrah Package" /></div>
+        <div class="field"><label>Category <span class="req">*</span></label>
+          <select [(ngModel)]="pkgForm.category" name="pkgCategory" class="f-input">
+            <option *ngFor="let c of pkgCategories" [value]="c">{{ c | titlecase }}</option>
+          </select></div>
+        <div class="field"><label>Price <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="pkgForm.price" name="pkgPrice" class="f-input" placeholder="PKR 185,000" /></div>
+        <div class="field"><label>Duration</label>
+          <input type="text" [(ngModel)]="pkgForm.duration" name="pkgDuration" class="f-input" placeholder="14 Days" /></div>
+        <div class="field"><label>Badge <span class="hint">optional</span></label>
+          <input type="text" [(ngModel)]="pkgForm.badge" name="pkgBadge" class="f-input" placeholder="Most Popular" /></div>
+        <div class="field full"><label>Image URL <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="pkgForm.img" name="pkgImg" class="f-input" placeholder="https://images.unsplash.com/…" /></div>
+        <div class="field full"><label>Features <span class="hint">one per line</span></label>
+          <textarea [(ngModel)]="pkgForm.features" name="pkgFeatures" class="f-input f-textarea"
+            placeholder="14 Days Stay&#10;5 Star Hotels&#10;Transport Included" rows="4"></textarea></div>
+      </div>
+
+      <!-- SERVICE FORM -->
+      <div *ngIf="modalSection === 'services'" class="form-grid">
+        <div class="field"><label>Icon <span class="hint">emoji</span></label>
+          <input type="text" [(ngModel)]="svcForm.icon" name="svcIcon" class="f-input" placeholder="✈️" /></div>
+        <div class="field"><label>Title <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="svcForm.title" name="svcTitle" class="f-input" placeholder="Flight Ticketing" /></div>
+        <div class="field full"><label>Description <span class="req">*</span></label>
+          <textarea [(ngModel)]="svcForm.desc" name="svcDesc" class="f-input f-textarea" rows="3" placeholder="Describe the service…"></textarea></div>
+        <div class="field"><label>Tags <span class="hint">comma-separated</span></label>
+          <input type="text" [(ngModel)]="svcForm.tags" name="svcTags" class="f-input" placeholder="International Flights, Best Price" /></div>
+        <div class="field"><label>Badge <span class="hint">optional</span></label>
+          <input type="text" [(ngModel)]="svcForm.badge" name="svcBadge" class="f-input" placeholder="Most Popular" /></div>
+      </div>
+
+      <!-- DESTINATION FORM -->
+      <div *ngIf="modalSection === 'destinations'" class="form-grid">
+        <div class="field"><label>Name <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="destForm.name" name="destName" class="f-input" placeholder="Saudi Arabia" /></div>
+        <div class="field"><label>Category <span class="req">*</span></label>
+          <select [(ngModel)]="destForm.category" name="destCategory" class="f-input">
+            <option *ngFor="let c of destCategories" [value]="c">{{ c | titlecase }}</option>
+          </select></div>
+        <div class="field full"><label>Image URL <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="destForm.img" name="destImg" class="f-input" placeholder="https://images.unsplash.com/…" /></div>
+        <div class="field"><label>Tag <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="destForm.tag" name="destTag" class="f-input" placeholder="Hajj & Umrah" /></div>
+        <div class="field"><label class="toggle-label">
+          <input type="checkbox" [(ngModel)]="destForm.popular" name="destPopular" />
+          <span>Mark as Popular</span>
+        </label></div>
+      </div>
+
+      <!-- ══════ EMPLOYEE FORM ══════ -->
+      <div *ngIf="modalSection === 'employees'" class="form-grid form-grid--emp">
+
+        <!-- Photo preview + URL -->
+        <div class="field full emp-photo-preview" *ngIf="empForm.img">
+          <div class="emp-preview-wrap">
+            <img [src]="empForm.img" alt="Preview" class="emp-preview-img"
+              onerror="this.style.display='none'" />
+            <span class="emp-preview-label">Photo Preview</span>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>Photo URL <span class="hint">Paste a direct image link (Cloudinary, Unsplash, etc.)</span></label>
+          <input type="text" [(ngModel)]="empForm.img" name="empImg" class="f-input"
+            placeholder="https://res.cloudinary.com/… or https://images.unsplash.com/…" />
+        </div>
+
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="empForm.name" name="empName" class="f-input" placeholder="e.g. M ALi" />
+        </div>
+        <div class="field">
+          <label>Role / Title <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="empForm.role" name="empRole" class="f-input" placeholder="e.g. CEO & Founder" />
+        </div>
+
+        <div class="field full">
+          <label>Bio / Description <span class="req">*</span></label>
+          <textarea [(ngModel)]="empForm.desc" name="empDesc" class="f-input f-textarea" rows="3"
+            placeholder="Short bio shown on the About page…"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Email <span class="hint">optional</span></label>
+          <input type="email" [(ngModel)]="empForm.email" name="empEmail" class="f-input" placeholder="name@company.com" />
+        </div>
+        <div class="field">
+          <label>Phone <span class="hint">optional</span></label>
+          <input type="text" [(ngModel)]="empForm.phone" name="empPhone" class="f-input" placeholder="+92 300 0000000" />
+        </div>
+
+        <div class="field">
+          <label>Display Order <span class="hint">lower = first</span></label>
+          <input type="number" [(ngModel)]="empForm.order" name="empOrder" class="f-input" placeholder="1" min="0" />
+        </div>
+
+        <div class="field form-divider full"><span>Social Links <span class="hint">optional</span></span></div>
+
+        <div class="field">
+          <label>LinkedIn URL</label>
+          <input type="text" [(ngModel)]="empForm.linkedin" name="empLinkedIn" class="f-input" placeholder="https://linkedin.com/in/…" />
+        </div>
+        <div class="field">
+          <label>Instagram URL</label>
+          <input type="text" [(ngModel)]="empForm.instagram" name="empInstagram" class="f-input" placeholder="https://instagram.com/…" />
+        </div>
+        <div class="field">
+          <label>Facebook URL</label>
+          <input type="text" [(ngModel)]="empForm.facebook" name="empFacebook" class="f-input" placeholder="https://facebook.com/…" />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal__footer">
+      <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+      <button type="button" class="btn-save" (click)="save()" [disabled]="saving">
+        <span *ngIf="!saving">{{ modalMode === 'add' ? 'Add' : 'Save Changes' }}</span>
+        <span *ngIf="saving" style="display:flex;align-items:center;gap:8px">
+          <span class="mini-spinner"></span>Saving…
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ DELETE CONFIRM ════ -->
+<div class="overlay" *ngIf="showDeleteConfirm" (click)="cancelDelete()">
+  <div class="modal modal--sm" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <div>
+        <span class="modal__eyebrow">Danger Zone</span>
+        <h3 class="modal__title">Confirm Delete</h3>
+      </div>
+      <button type="button" class="modal__close" (click)="cancelDelete()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <p class="del-msg">This action is <strong>permanent</strong> and cannot be undone. Are you sure you want to delete this item?</p>
+    </div>
+    <div class="modal__footer">
+      <button type="button" class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+      <button type="button" class="btn-delete" (click)="doDelete()">Yes, Delete</button>
+    </div>
+  </div>
+</div>

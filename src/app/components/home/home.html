@@ -1,0 +1,432 @@
+<!-- ══════════════════════════════════════════
+     HELICOPTER DROP
+══════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════
+     HELICOPTER DROP  —  Redesigned
+══════════════════════════════════════════ -->
+<div class="heli-stage" *ngIf="planeRendered" [class.heli-go]="planeActive" [class.heli-leave]="planeLeaving">
+
+  <!-- Helicopter -->
+  <div class="heli-craft">
+    <img src="Helicopter.png" alt="Helicopter" class="heli-img"/>
+  </div>
+
+  <!-- Rope -->
+  <div class="heli-rope">
+    <div class="heli-rope-inner"></div>
+  </div>
+
+  <!-- Card -->
+  <div class="heli-card">
+    <div class="heli-card-hook"></div>
+
+    <div class="heli-card-body">
+
+      <!-- Shimmer sweep -->
+      <div class="heli-shimmer"></div>
+
+      <!-- Particles -->
+      <div class="heli-particle heli-particle--1"></div>
+      <div class="heli-particle heli-particle--2"></div>
+      <div class="heli-particle heli-particle--3"></div>
+      <div class="heli-particle heli-particle--4"></div>
+
+      <!-- Close -->
+      <button class="heli-x" (click)="closePlane()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="10" height="10">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Top row: badge + year -->
+      <div class="heli-top-row">
+        <span class="heli-badge">
+          <span class="heli-badge-dot"></span>
+          Limited Offer !
+        </span>
+        <span class="heli-year">2026</span>
+      </div>
+
+      <!-- Icon + Title -->
+      <div class="heli-icon-wrap">
+        <span class="heli-icon">🕌</span>
+        <div class="heli-icon-glow"></div>
+      </div>
+
+      <h3 class="heli-title">Umrah &amp; Hajj<br><span>Packages</span></h3>
+
+      <!-- Price row
+      <div class="heli-price-row">
+        <div class="heli-price">
+          <span class="heli-price-from">Starting from</span>
+          <strong>PKR 185,000</strong>
+        </div>
+        <div class="heli-divider-v"></div>
+        <div class="heli-stars">
+          <span>★★★★★</span>
+          <span class="heli-stars-label">50K+ Travellers</span>
+        </div>
+      </div> -->
+
+      <!-- Trust pills -->
+      <div class="heli-pills">
+        <span>✓ LICENCE Certified</span>
+        <span>✓ Best Prices</span>
+        <span>✓ 24/7 Support</span>
+      </div>
+
+      <!-- CTA -->
+      <a routerLink="/packages" class="heli-btn" (click)="closePlane()">
+        <span>Explore Packages</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__noise"></div>
+  <div class="hero__grid"></div>
+
+  <div class="hero__wrap">
+
+    <!-- LEFT -->
+    <div class="hero__left">
+      <div class="hero__pill hm-reveal">
+        <span class="hero__pill-dot"></span>
+        LICENCE Certified &nbsp;·&nbsp; Trusted Since 2005
+      </div>
+
+      <h1 class="hero__h1 hm-reveal" style="--d:.08s">
+        Your Journey<br>
+        <span class="hero__h1-accent">Starts Here</span>
+      </h1>
+
+      <p class="hero__sub hm-reveal" style="--d:.18s">
+        Pakistan's most trusted travel partner for <strong>Umrah, Hajj,</strong>
+        international tours &amp; visa services. Over <strong>50,000 happy travellers</strong> and counting.
+      </p>
+
+      <div class="hero__btns hm-reveal" style="--d:.28s">
+        <a routerLink="/packages" class="btn-primary">
+          Explore Packages
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a routerLink="/contact" class="btn-outline">Contact Us</a>
+      </div>
+
+      <div class="hero__tags hm-reveal" style="--d:.36s">
+        <span>✅ LICENCE Certified</span>
+        <span>🛡️ Secure Booking</span>
+        <span>🌍 460+ Destinations</span>
+      </div>
+
+      <!-- Vertical stat strip -->
+      <div class="hero__strip hm-reveal" style="--d:.44s">
+        <div class="hero__strip-item">
+          <strong>50K+</strong>
+          <span>Travellers</span>
+        </div>
+        <div class="hero__strip-divider"></div>
+        <div class="hero__strip-item">
+          <strong>15+</strong>
+          <span>Years Active</span>
+        </div>
+        <div class="hero__strip-divider"></div>
+        <div class="hero__strip-item">
+          <strong>24/7</strong>
+          <span>Support</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero__right hm-reveal-right">
+      <div class="hero__img-frame">
+        <div class="hero__img-corner hero__img-corner--tl"></div>
+        <div class="hero__img-corner hero__img-corner--br"></div>
+        <img
+          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&auto=format&fit=crop&q=80"
+          alt="Airplane in sky"
+          class="hero__img"
+        />
+        <div class="hero__img-overlay"></div>
+
+        <!-- Floating badge -->
+        <div class="hero__badge hero__badge--top">
+          <div class="hero__badge-icon" style="color: white;">✈</div>
+          <div class="hero__badge-text">
+            <strong>460+</strong>
+            <span>Destinations</span>
+          </div>
+        </div>
+
+        <div class="hero__badge hero__badge--bot">
+          <div class="hero__badge-dot"></div>
+          <div class="hero__badge-text">
+            <strong>Live Support</strong>
+            <span>Available Now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero__scroll-cue">
+    <span>Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STATS TICKER
+══════════════════════════════════════════ -->
+<div class="stats hm-trigger-counters">
+  <div class="stats__wrap">
+    <div class="stats__item">
+      <strong class="stats__num">{{ years }}+</strong>
+      <span class="stats__lbl">Years Experience</span>
+    </div>
+    <div class="stats__line"></div>
+    <div class="stats__item">
+      <strong class="stats__num">{{ destinations }}+</strong>
+      <span class="stats__lbl">Destinations</span>
+    </div>
+    <div class="stats__line"></div>
+    <div class="stats__item">
+      <strong class="stats__num">{{ customers }}K+</strong>
+      <span class="stats__lbl">Happy Customers</span>
+    </div>
+    <div class="stats__line"></div>
+    <div class="stats__item">
+      <strong class="stats__num">24/7</strong>
+      <span class="stats__lbl">Travel Support</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SERVICES — Horizontal stacked cards
+══════════════════════════════════════════ -->
+<section class="srv">
+  <div class="srv__wrap">
+
+    <div class="srv__head hm-reveal">
+      <div class="srv__head-left">
+        <span class="eyebrow">What We Offer</span>
+        <h2 class="sec-h2">Our Core Services</h2>
+      </div>
+      <p class="srv__head-desc">Everything you need for a perfect journey — all under one roof.</p>
+    </div>
+
+    <div class="srv__grid">
+
+      <div class="srv__card hm-reveal" style="--d:0s">
+        <div class="srv__card-num">01</div>
+        <div class="srv__card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+            <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+          </svg>
+        </div>
+        <div class="srv__card-body">
+          <h3>Flight Bookings</h3>
+          <p>Domestic &amp; international flights at best rates with instant confirmation.</p>
+          <a routerLink="/services" class="srv__link">Learn more →</a>
+        </div>
+      </div>
+
+      <div class="srv__card hm-reveal" style="--d:.07s">
+        <div class="srv__card-num">02</div>
+        <div class="srv__card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="srv__card-body">
+          <h3>Umrah &amp; Hajj</h3>
+          <p>Complete packages with hotel, transport &amp; dedicated guide included.</p>
+          <a routerLink="/packages" class="srv__link">Learn more →</a>
+        </div>
+      </div>
+
+      <div class="srv__card hm-reveal" style="--d:.14s">
+        <div class="srv__card-num">03</div>
+        <div class="srv__card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
+        </div>
+        <div class="srv__card-body">
+          <h3>Visa Assistance</h3>
+          <p>End-to-end visa processing for 100+ countries with high success rate.</p>
+          <a routerLink="/services" class="srv__link">Learn more →</a>
+        </div>
+      </div>
+
+      <div class="srv__card hm-reveal" style="--d:.21s">
+        <div class="srv__card-num">04</div>
+        <div class="srv__card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="srv__card-body">
+          <h3>Hotel Bookings</h3>
+          <p>Handpicked hotels worldwide — from budget stays to luxury resorts.</p>
+          <a routerLink="/services" class="srv__link">Learn more →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="srv__cta hm-reveal" style="--d:.28s">
+      <a routerLink="/services" class="btn-outline-dark">View All Services →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     WHY US — Full-bleed editorial split
+══════════════════════════════════════════ -->
+<section class="why">
+  <div class="why__left hm-reveal-left">
+    <span class="eyebrow eyebrow--green">Why Choose Us</span>
+    <h2 class="why__h2">We've Been<br>Doing This<br><em>Since 2005</em></h2>
+    <p class="why__desc">World-class travel experiences built on trust, expertise, and unbeatable prices. Here's what sets us apart from the rest.</p>
+    <a routerLink="/about" class="btn-primary">About Us →</a>
+
+    <div class="why__cert">
+      <div class="why__cert-icon">🏅</div>
+      <div>
+        <strong>LICENCE Certified Agency</strong>
+        <span>International Air Transport Association</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="why__right hm-reveal-right">
+    <div class="why__cards">
+      <div class="why__card">
+        <div class="why__card-emoji">🌍</div>
+        <h4>460+ Destinations</h4>
+        <p>From pilgrimage sites to exotic getaways — we cover the world.</p>
+      </div>
+      <div class="why__card">
+        <div class="why__card-emoji">🧭</div>
+        <h4>Expert Guides</h4>
+        <p>Certified guides with 15+ years of experience on every trip.</p>
+      </div>
+      <div class="why__card">
+        <div class="why__card-emoji">🎫</div>
+        <h4>Easy Booking</h4>
+        <p>Book in minutes — fast, simple, and 100% secure process.</p>
+      </div>
+      <div class="why__card">
+        <div class="why__card-emoji">💰</div>
+        <h4>Best Price</h4>
+        <p>We match any price and ensure you get the best deal always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     EXPERIENCE — Image + content
+══════════════════════════════════════════ -->
+<section class="exp">
+  <div class="exp__wrap">
+
+    <div class="exp__img-col hm-reveal-left">
+      <div class="exp__img-frame">
+        <img
+          src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=700&auto=format&fit=crop&q=80"
+          alt="Travel Experience"
+          class="exp__img"
+        />
+        <div class="exp__img-tag">
+          <span class="exp__img-tag-icon">⚙️</span>
+          <div>
+            <strong>24/7</strong>
+            <span>Guide Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp__content hm-reveal-right">
+      <span class="eyebrow">Our Experience</span>
+      <h2 class="sec-h2">With Our Experience<br>We Will Serve You</h2>
+      <p class="exp__desc">Since 2005 we have prioritised your convenience — low prices, transparent process and a dedicated support team at every step of your journey.</p>
+
+      <div class="exp__nums">
+        <div class="exp__num">
+          <strong>15+</strong><span>Years Experience</span>
+        </div>
+        <div class="exp__num">
+          <strong>460+</strong><span>Destinations</span>
+        </div>
+        <div class="exp__num">
+          <strong>50K+</strong><span>Happy Customers</span>
+        </div>
+      </div>
+
+      <a routerLink="/about" class="btn-primary" style="margin-top: 36px; display: inline-flex;">Our Story →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CTA
+══════════════════════════════════════════ -->
+<section class="cta">
+  <div class="cta__bg-grid"></div>
+  <div class="cta__glow"></div>
+
+  <div class="cta__wrap hm-reveal">
+    <div class="cta__pill">
+      <span class="cta__pill-dot"></span>
+      Limited Time Offer
+    </div>
+
+    <h2 class="cta__h2">
+      Ready to Explore<br>the World?
+      <span class="cta__emoji">🌐</span>
+    </h2>
+
+    <p class="cta__sub">Special packages for Umrah, international tours &amp; family trips. Let us plan your perfect journey.</p>
+
+    <div class="cta__btns">
+      <a routerLink="/packages" class="btn-primary">View Packages</a>
+      <a href="https://wa.me/923484042647" target="_blank" rel="noopener" class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.309A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.952 7.952 0 01-4.049-1.107l-.29-.172-3.004.788.806-2.937-.19-.302A7.952 7.952 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+        </svg>
+        WhatsApp Us
+      </a>
+    </div>
+
+    <div class="cta__trust">
+      <span>✓ No hidden fees</span>
+      <span>✓ Instant confirmation</span>
+      <span>✓ 24/7 support</span>
+    </div>
+  </div>
+</section>

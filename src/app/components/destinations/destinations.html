@@ -1,0 +1,269 @@
+<!-- ══════════════════════════════════════════
+     SECTION 1: HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__noise"></div>
+  <div class="hero__orb"></div>
+
+  <div class="wrap hero__grid">
+
+    <div class="hero__left scroll-animate fade-left">
+      <span class="eyebrow">Explore the World 🌍</span>
+      <h1 class="hero__h1">
+        Discover Your<br>
+        Perfect<br>
+        <span class="accent">Dream Destination</span>
+      </h1>
+      <p class="hero__desc">
+        From the sacred lands of Saudi Arabia to the pristine beaches of Maldives —
+        explore <strong>460+ destinations</strong> worldwide with Pak New Al-Ghani Travels &amp; Tours.
+      </p>
+
+      <div class="hero__strip">
+        <div class="hero__strip-item">
+          <strong>460+</strong><span>Destinations</span>
+        </div>
+        <div class="hero__strip-div"></div>
+        <div class="hero__strip-item">
+          <strong>50K+</strong><span>Happy Travellers</span>
+        </div>
+        <div class="hero__strip-div"></div>
+        <div class="hero__strip-item">
+          <strong>15+</strong><span>Years Experience</span>
+        </div>
+      </div>
+
+      <a routerLink="/contact" class="btn-primary">Plan Your Trip →</a>
+    </div>
+
+    <div class="hero__right scroll-animate fade-right">
+      <div class="hero__img-frame">
+        <div class="hero__img-corner hero__img-corner--tl"></div>
+        <div class="hero__img-corner hero__img-corner--br"></div>
+        <img
+          src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&auto=format&fit=crop&q=80"
+          alt="World Travel"
+          class="hero__img"
+        />
+        <div class="hero__img-overlay"></div>
+      </div>
+
+      <div class="hero__badge">
+        <div class="hero__badge-icon">🌍</div>
+        <div>
+          <strong>460+ Destinations</strong>
+          <span>Worldwide Coverage</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: HIGHLIGHTS
+═══════════════════════════════════════════ -->
+<section class="highlights">
+  <div class="wrap">
+
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center">What We Offer</span>
+      <h2 class="sec-h2 sec-h2--center">Travel Experiences for<br>Every Type of Explorer</h2>
+    </div>
+
+    <div class="highlights__grid">
+      <div
+        class="hl-card scroll-animate fade-up"
+        *ngFor="let h of highlights; let i = index"
+        [style.transitionDelay]="(i * 0.1) + 's'"
+      >
+        <span class="hl-card__icon">{{ h.icon }}</span>
+        <h4 class="hl-card__label">{{ h.label }}</h4>
+        <p class="hl-card__desc">{{ h.desc }}</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: DESTINATIONS GRID
+═══════════════════════════════════════════ -->
+<section class="dests">
+  <div class="wrap">
+
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center">Our Destinations</span>
+      <h2 class="sec-h2 sec-h2--center">Explore the World<br>with Us</h2>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs scroll-animate fade-up">
+      <button
+        type="button"
+        *ngFor="let f of filters"
+        class="filter-btn"
+        [class.filter-btn--active]="activeFilter === f"
+        (click)="setFilter(f)"
+      >
+        {{ f === 'all' ? 'All Destinations' : f === 'middle-east' ? 'Middle East' : (f | titlecase) }}
+      </button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading-wrap" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading destinations…</p>
+    </div>
+
+    <!-- EMPTY -->
+    <div class="empty-state" *ngIf="!loading && filtered.length === 0">
+      <span class="empty-icon">🌍</span>
+      <h3>No Destinations Found</h3>
+      <p *ngIf="activeFilter !== 'all'">
+        No destinations in <strong>{{ activeFilter === 'middle-east' ? 'Middle East' : (activeFilter | titlecase) }}</strong>.
+        <button type="button" class="reset-filter" (click)="setFilter('all')">View All →</button>
+      </p>
+      <p *ngIf="activeFilter === 'all'">No destinations available right now. Check back soon!</p>
+    </div>
+
+    <!-- DESTINATION CARDS -->
+    <div class="dest-grid" *ngIf="!loading && filtered.length > 0">
+      <div
+        class="dest-card scroll-animate fade-up"
+        *ngFor="let d of filtered; let i = index"
+        [style.transitionDelay]="(i * 0.09) + 's'"
+      >
+        <!-- Image -->
+        <div class="dest-card__img-wrap">
+          <img [src]="d.img" [alt]="d.name" class="dest-card__img" />
+          <div class="dest-card__img-overlay"></div>
+          <span class="dest-card__popular" *ngIf="d.popular">⭐ Popular</span>
+          <span class="dest-card__tag" *ngIf="d.tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            {{ d.tag }}
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="dest-card__body">
+          <h3 class="dest-card__name">{{ d.name }}</h3>
+          <p class="dest-card__country" *ngIf="d.country">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+            </svg>
+            {{ d.country }}
+          </p>
+
+          <a routerLink="/contact" class="dest-card__cta">
+            Book Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Hover bar -->
+        <div class="dest-card__bar"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: WHY CHOOSE US
+═══════════════════════════════════════════ -->
+<section class="why">
+  <div class="why__header">
+    <div class="wrap">
+      <div class="why__header-inner">
+        <div class="why__header-left">
+          <span class="eyebrow eyebrow--white">Why Travel With Us</span>
+          <h2 class="why__h2">Trusted by<br><em>50,000+ Happy<br>Travellers</em></h2>
+        </div>
+        <div class="why__header-right">
+          <p class="why__header-desc">
+            We've been delivering world-class travel experiences since 2005.
+            Here's why thousands choose us for their journey every year.
+          </p>
+          <div class="why__header-pill">
+            <span class="why__header-pill-dot"></span>
+            LICENCE Certified · Est. 2005
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why__stage">
+    <div class="wrap">
+      <div class="why__grid">
+        <div class="why__card scroll-animate fade-up" style="--d:0s">
+          <div class="why__icon">🗺️</div>
+          <h4>460+ Destinations</h4>
+          <p>We cover an extensive network of destinations worldwide — from sacred sites to tropical escapes.</p>
+        </div>
+        <div class="why__card scroll-animate fade-up" style="--d:.11s">
+          <div class="why__icon">🛡️</div>
+          <h4>Fully Trusted Agency</h4>
+          <p>LICENCE-certified, government-approved travel agency with 15+ years of proven experience.</p>
+        </div>
+        <div class="why__card scroll-animate fade-up" style="--d:.22s">
+          <div class="why__icon">🎧</div>
+          <h4>24/7 Customer Support</h4>
+          <p>Round-the-clock support before, during, and after your journey — always available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: CTA
+═══════════════════════════════════════════ -->
+<section class="cta">
+  <div class="cta__bg-grid"></div>
+  <div class="cta__glow"></div>
+
+  <div class="wrap">
+    <div class="cta__wrap scroll-animate fade-up">
+      <div class="cta__pill">
+        <span class="cta__pill-dot"></span>
+        Custom Trips Available
+      </div>
+      <h2 class="cta__h2">Can't Find Your<br>Destination?</h2>
+      <p class="cta__sub">
+        We cover 460+ destinations worldwide. Contact us and we'll plan your perfect custom trip —
+        tailored to your schedule and budget.
+      </p>
+      <div class="cta__btns">
+        <a href="https://wa.me/923156262051" target="_blank" rel="noopener" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.309A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.952 7.952 0 01-4.049-1.107l-.29-.172-3.004.788.806-2.937-.19-.302A7.952 7.952 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+          </svg>
+          💬 WhatsApp Us
+        </a>
+        <a href="tel:+923156262051" class="btn-wa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          📞 Call Now
+        </a>
+      </div>
+      <div class="cta__trust">
+        <span>✓ No Hidden Fees</span>
+        <span>✓ LICENCE Certified</span>
+        <span>✓ 24/7 Support</span>
+      </div>
+    </div>
+  </div>
+</section>

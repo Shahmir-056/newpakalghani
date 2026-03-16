@@ -1,0 +1,294 @@
+<!-- ══════════════════════════════════════════
+     SECTION 1: HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__noise"></div>
+  <div class="hero__orb"></div>
+
+  <div class="wrap hero__grid">
+
+    <div class="hero__left scroll-animate fade-left">
+      <span class="eyebrow">Get In Touch 📬</span>
+      <h1 class="hero__h1">
+        We're Here to Help<br>
+        <span class="accent">Plan Your Journey</span>
+      </h1>
+      <p class="hero__desc">
+        Have questions about packages, visa, or bookings? Our team is available
+        24/7 to guide you through every step of your travel journey.
+      </p>
+
+      <div class="hero__quick">
+        <div class="hero__quick-item">
+          <span class="qi-check">✓</span>
+          <span>Fast response within 24 hours</span>
+        </div>
+        <div class="hero__quick-item">
+          <span class="qi-check">✓</span>
+          <span>Expert travel consultants on hand</span>
+        </div>
+        <div class="hero__quick-item">
+          <span class="qi-check">✓</span>
+          <span>WhatsApp support available 24/7</span>
+        </div>
+      </div>
+
+      <a
+        href="https://wa.me/923156262051"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.309A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.952 7.952 0 01-4.049-1.107l-.29-.172-3.004.788.806-2.937-.19-.302A7.952 7.952 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+        </svg>
+        💬 Chat on WhatsApp
+      </a>
+    </div>
+
+    <div class="hero__right scroll-animate fade-right">
+      <div class="hero__img-frame">
+        <div class="hero__img-corner hero__img-corner--tl"></div>
+        <div class="hero__img-corner hero__img-corner--br"></div>
+        <img
+          src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=700&auto=format&fit=crop&q=80"
+          alt="Contact Us"
+          class="hero__img"
+        />
+        <div class="hero__img-overlay"></div>
+      </div>
+
+      <div class="hero__badge">
+        <div class="hero__badge-icon">🎧</div>
+        <div>
+          <strong>24/7 Support</strong>
+          <span>Always here for you</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: CONTACT INFO CARDS
+═══════════════════════════════════════════ -->
+<section class="info">
+  <div class="wrap">
+    <div class="info__grid">
+      <a
+        class="info__card scroll-animate fade-up"
+        *ngFor="let c of contactInfo; let i = index"
+        [href]="c.link"
+        [target]="c.link.startsWith('http') ? '_blank' : '_self'"
+        [style.transitionDelay]="(i * 0.09) + 's'"
+        rel="noopener noreferrer"
+      >
+        <div class="info__icon">{{ c.icon }}</div>
+        <div class="info__text">
+          <p class="info__title">{{ c.title }}</p>
+          <p class="info__value">{{ c.value }}</p>
+          <span class="info__sub">{{ c.sub }}</span>
+        </div>
+        <span class="info__arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: FORM + MAP
+═══════════════════════════════════════════ -->
+<section class="form-map">
+  <div class="wrap form-map__grid">
+
+    <!-- LEFT: Contact Form -->
+    <div class="form-side scroll-animate fade-left">
+
+      <div class="form-side__head">
+        <span class="eyebrow">Send a Message</span>
+        <h2 class="form-side__h2">We'd Love to<br>Hear From You</h2>
+        <p class="form-side__sub">Fill in the form and we'll get back to you within 24 hours.</p>
+      </div>
+
+      <!-- Success -->
+      <div class="success-msg" *ngIf="submitted">
+        <span class="success-msg__icon">✅</span>
+        <div>
+          <strong>Message Sent Successfully!</strong>
+          <p>We'll get back to you within 24 hours. You can also reach us on WhatsApp for a faster response.</p>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="error-msg" *ngIf="error">
+        ⚠️ {{ error }}
+      </div>
+
+      <form class="contact-form" (ngSubmit)="onSubmit()" *ngIf="!submitted">
+
+        <div class="form__row">
+          <div class="form__group">
+            <label>Full Name <span class="req">*</span></label>
+            <input
+              type="text"
+              [(ngModel)]="formData.name"
+              name="name"
+              placeholder="Your full name"
+              class="form__input"
+              required
+            />
+          </div>
+          <div class="form__group">
+            <label>Email Address <span class="req">*</span></label>
+            <input
+              type="email"
+              [(ngModel)]="formData.email"
+              name="email"
+              placeholder="your@email.com"
+              class="form__input"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="form__group">
+            <label>Phone Number</label>
+            <input
+              type="tel"
+              [(ngModel)]="formData.phone"
+              name="phone"
+              placeholder="+92 3XX XXXXXXX"
+              class="form__input"
+            />
+          </div>
+          <div class="form__group">
+            <label>Subject</label>
+            <input
+              type="text"
+              [(ngModel)]="formData.subject"
+              name="subject"
+              placeholder="e.g. Umrah Package Inquiry"
+              class="form__input"
+            />
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label>Message <span class="req">*</span></label>
+          <textarea
+            [(ngModel)]="formData.message"
+            name="message"
+            placeholder="Tell us about your travel plans, questions, or any queries..."
+            class="form__input form__textarea"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="submitting">
+          <span *ngIf="!submitting">
+            Send Message
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
+            </svg>
+          </span>
+          <span *ngIf="submitting">Sending…</span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- RIGHT: Map + Office Info -->
+    <div class="map-side scroll-animate fade-right">
+
+      <span class="eyebrow">Our Location</span>
+      <h2 class="map-side__h2">Find Us Here</h2>
+
+      <div class="map__wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3420.3!2d74.2122194!3d32.7682554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391f388888888888%3A0x0!2sNEW+PAK+AL-GHANI+TRAVEL+%26+TOURS!5e1!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+          width="100%"
+          height="280"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map__iframe"
+        ></iframe>
+      </div>
+
+      <div class="office-card">
+        <div class="office-card__row">
+          <div class="office-card__icon">📍</div>
+          <div>
+            <span class="office-card__label">Office Address</span>
+            <p class="office-card__value">Buss Stop, Rana Faiz Market, Awan Sharif Road,<br>Jalalpur Sobtian, 50700, Punjab, Pakistan</p>
+          </div>
+        </div>
+        <div class="office-card__row">
+          <div class="office-card__icon">🕐</div>
+          <div>
+            <span class="office-card__label">Working Hours</span>
+            <p class="office-card__value">Monday – Saturday: 9:00 AM – 8:00 PM</p>
+          </div>
+        </div>
+        <div class="office-card__row">
+          <div class="office-card__icon">💬</div>
+          <div>
+            <span class="office-card__label">WhatsApp</span>
+            <p class="office-card__value">Available 24/7 for urgent queries</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: CTA
+═══════════════════════════════════════════ -->
+<section class="cta">
+  <div class="cta__bg-grid"></div>
+  <div class="cta__glow"></div>
+
+  <div class="wrap">
+    <div class="cta__wrap scroll-animate fade-up">
+      <div class="cta__pill">
+        <span class="cta__pill-dot"></span>
+        Ready to Travel?
+      </div>
+      <h2 class="cta__h2">Ready to Start<br>Your Journey?</h2>
+      <p class="cta__sub">
+        Book your dream trip today. Our experts are waiting to help you
+        plan the perfect travel experience tailored to your needs.
+      </p>
+      <div class="cta__btns">
+        <a href="https://wa.me/923156262051" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.309A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.952 7.952 0 01-4.049-1.107l-.29-.172-3.004.788.806-2.937-.19-.302A7.952 7.952 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+          </svg>
+          💬 WhatsApp Us
+        </a>
+        <a href="tel:+923156262051" class="btn-wa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          📞 Call Now
+        </a>
+      </div>
+      <div class="cta__trust">
+        <span>✓ No Hidden Fees</span>
+        <span>✓ LICENCE Certified</span>
+        <span>✓ 24/7 Support</span>
+      </div>
+    </div>
+  </div>
+</section>

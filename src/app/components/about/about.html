@@ -1,0 +1,407 @@
+<!-- ══════════════════════════════════════════
+     SECTION 1: OUR STORY
+═══════════════════════════════════════════ -->
+<section class="story">
+  <div class="story__noise"></div>
+  <div class="story__orb"></div>
+
+  <div class="wrap story__grid">
+
+    <div class="story__left scroll-animate fade-left">
+      <span class="eyebrow">Our Story 🧭</span>
+      <h1 class="story__h1">Discover Our<br>Journey of<br><span class="accent">Excellence</span></h1>
+      <p class="story__desc">
+        From humble beginnings in Jalalpur Sobatiyan, Gujrat, to becoming a trusted travel
+        partner for thousands worldwide. Our story is one of dedication, innovation,
+        and unwavering commitment to every traveller.
+      </p>
+
+      <div class="story__stats">
+        <div class="story__stat">
+          <strong>15+</strong>
+          <span>Years Experience</span>
+        </div>
+        <div class="story__stat-line"></div>
+        <div class="story__stat">
+          <strong>50K+</strong>
+          <span>Happy Travellers</span>
+        </div>
+        <div class="story__stat-line"></div>
+        <div class="story__stat">
+          <strong>460+</strong>
+          <span>Destinations</span>
+        </div>
+      </div>
+
+      <a routerLink="/contact" class="btn-primary">Get In Touch →</a>
+    </div>
+
+    <div class="story__right scroll-animate fade-right">
+      <div class="story__img-frame">
+        <div class="story__img-corner story__img-corner--tl"></div>
+        <div class="story__img-corner story__img-corner--br"></div>
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&auto=format&fit=crop&q=80"
+          alt="Our Journey"
+          class="story__img"
+        />
+        <div class="story__img-overlay"></div>
+      </div>
+
+      <div class="story__cert">
+        <div class="story__cert-icon">🏅</div>
+        <div>
+          <strong>LICENCE Certified Agency</strong>
+          <span>Since 2005 · International Accredited</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: OUR JOURNEY — Redesigned
+═══════════════════════════════════════════ -->
+<section class="journey">
+
+  <!-- Dark header band -->
+  <div class="journey__header">
+    <div class="wrap">
+      <div class="journey__header-inner">
+
+        <div class="journey__header-left">
+          <span class="eyebrow eyebrow--white">Our Journey</span>
+          <h2 class="journey__h2">
+            Two Decades of Growth,<br>
+            Innovation <em>&amp; Dedication</em>
+          </h2>
+        </div>
+
+        <div class="journey__header-right">
+          <p class="journey__header-desc">
+            From a small office in Jalalpur Sobatiyan to serving 50,000+ travellers across
+            460+ destinations — every milestone shaped who we are today.
+          </p>
+          <div class="journey__header-pill">
+            <span class="journey__header-pill-dot"></span>
+            Est. 2005 · Still Going Strong
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Light stage: track + cards -->
+  <div class="journey__stage">
+    <div class="wrap">
+
+      <!-- Animated progress track -->
+      <div class="journey__track">
+        <div class="journey__track-fill"></div>
+        <div
+          *ngFor="let item of journey; let i = index"
+          class="journey__track-node"
+          [style.left]="(i / (journey.length - 1) * 100) + '%'"
+        >
+          <span>{{ item.year }}</span>
+        </div>
+      </div>
+
+      <!-- Milestone cards -->
+      <div class="journey__cards">
+        <div
+          *ngFor="let item of journey; let i = index"
+          class="journey__card scroll-animate"
+          [class.journey__card--alt]="i % 2 !== 0"
+          [class.fade-up]="i % 2 === 0"
+          [class.fade-down]="i % 2 !== 0"
+          [style.transitionDelay]="(i * 0.14) + 's'"
+        >
+          <div class="journey__card-bg-year">{{ item.year }}</div>
+          <div class="journey__card-bar"></div>
+          <div class="journey__card-index">0{{ i + 1 }}</div>
+
+          <div class="journey__card-year">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+            {{ item.year }}
+          </div>
+
+          <h4 class="journey__card-title">{{ item.title }}</h4>
+          <p class="journey__card-desc">{{ item.desc }}</p>
+          <div class="journey__card-dot"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Green stat ribbon -->
+  <div class="journey__ribbon">
+    <div class="wrap">
+      <div class="journey__ribbon-inner">
+        <div class="journey__ribbon-item">
+          <strong>2005</strong><span>Founded</span>
+        </div>
+        <div class="journey__ribbon-div"></div>
+        <div class="journey__ribbon-item">
+          <strong>20+</strong><span>Years Active</span>
+        </div>
+        <div class="journey__ribbon-div"></div>
+        <div class="journey__ribbon-item">
+          <strong>5</strong><span>Major Milestones</span>
+        </div>
+        <div class="journey__ribbon-div"></div>
+        <div class="journey__ribbon-item">
+          <strong>50K+</strong><span>Travellers Served</span>
+        </div>
+        <div class="journey__ribbon-div"></div>
+        <div class="journey__ribbon-item">
+          <strong>460+</strong><span>Destinations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: MISSION & VALUES
+═══════════════════════════════════════════ -->
+<section class="mission">
+  <div class="wrap">
+
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center">Our Mission &amp; Values</span>
+      <h2 class="sec-h2 sec-h2--center">The Principles That Guide Us</h2>
+    </div>
+
+    <div class="mission__grid">
+
+      <div class="mission__left scroll-animate fade-left">
+        <h3 class="mission__sub">Empowering Your<br>Travel Dreams</h3>
+        <p class="mission__desc">
+          Our mission is to provide exceptional travel experiences by offering
+          comprehensive solutions that cater to every traveller's unique needs.
+          We aim to make travel accessible, memorable, and hassle-free for everyone.
+        </p>
+        <div class="mission__btns">
+          <a routerLink="/packages" class="btn-primary">Explore Packages →</a>
+          <a routerLink="/services" class="btn-outline">Our Services</a>
+        </div>
+
+        <div class="mission__strip">
+          <div class="mission__strip-item">
+            <strong>50K+</strong><span>Travellers Served</span>
+          </div>
+          <div class="mission__strip-div"></div>
+          <div class="mission__strip-item">
+            <strong>100%</strong><span>LICENCE Certified</span>
+          </div>
+          <div class="mission__strip-div"></div>
+          <div class="mission__strip-item">
+            <strong>24/7</strong><span>Support</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mission__values scroll-animate fade-right">
+        <div class="val-card">
+          <div class="val-card__icon">🛡️</div>
+          <h4>Trust &amp; Reliability</h4>
+          <p>Building customer satisfaction through transparent and dependable service every step of the way.</p>
+        </div>
+        <div class="val-card">
+          <div class="val-card__icon">⭐</div>
+          <h4>Excellence</h4>
+          <p>Delivering exceptional quality in every aspect of our service — no compromises.</p>
+        </div>
+        <div class="val-card">
+          <div class="val-card__icon">👥</div>
+          <h4>Customer First</h4>
+          <p>Your satisfaction and comfort are our top priorities, always and in every interaction.</p>
+        </div>
+        <div class="val-card">
+          <div class="val-card__icon">🌍</div>
+          <h4>Global Reach</h4>
+          <p>Connecting you to 460+ destinations across every continent worldwide.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mission__numbar scroll-animate fade-up">
+      <div class="mission__num">
+        <strong>20+</strong><span>Years Experience</span>
+      </div>
+      <div class="mission__num-line"></div>
+      <div class="mission__num">
+        <strong>50K+</strong><span>Happy Travellers</span>
+      </div>
+      <div class="mission__num-line"></div>
+      <div class="mission__num">
+        <strong>460+</strong><span>Destinations</span>
+      </div>
+      <div class="mission__num-line"></div>
+      <div class="mission__num">
+        <strong>24/7</strong><span>Travel Support</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: TESTIMONIALS
+═══════════════════════════════════════════ -->
+<section class="testi">
+  <div class="testi__bg-grid"></div>
+
+  <div class="wrap">
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center eyebrow--white">What Our Travellers Say</span>
+      <h2 class="sec-h2 sec-h2--center sec-h2--white">Real Experiences from<br>Our Valued Customers</h2>
+    </div>
+
+    <div class="testi__grid">
+      <div
+        class="testi__card scroll-animate fade-up"
+        *ngFor="let t of testimonials; let i = index"
+        [style.transitionDelay]="(i * 0.13) + 's'"
+      >
+        <div class="testi__quote">"</div>
+        <p class="testi__text">{{ t.text }}</p>
+        <div class="testi__stars">
+          <span *ngFor="let s of getStars(t.stars)">★</span>
+        </div>
+        <div class="testi__footer">
+          <div class="testi__avatar">{{ t.name.charAt(0) }}</div>
+          <div class="testi__info">
+            <strong>{{ t.name }}</strong>
+            <span>{{ t.trip }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ &nbsp;
+ &nbsp;
+ &nbsp;
+<!-- ══════════════════════════════════════════
+     SECTION 5: TEAM  (Dynamic — loaded from Admin)
+═══════════════════════════════════════════ -->
+<section class="team">
+  <div class="wrap">
+
+    <div class="sec-head scroll-animate fade-up">
+      <span class="eyebrow eyebrow--center">Meet Our Team</span>
+      <h2 class="sec-h2 sec-h2--center">The Experts Behind<br>Every Journey</h2>
+    </div>
+
+    <!-- Loading skeleton -->
+    <div class="team__grid" *ngIf="teamLoading">
+      <div class="team__card team__card--skeleton" *ngFor="let s of [1,2,3,4]">
+        <div class="team__card-top team__skeleton-top"></div>
+        <div class="team__card-body">
+          <div class="team__skeleton-line team__skeleton-line--name"></div>
+          <div class="team__skeleton-line team__skeleton-line--role"></div>
+          <div class="team__skeleton-line team__skeleton-line--desc"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actual team cards — only renders if Firestore returned members -->
+    <div class="team__grid" *ngIf="!teamLoading && team.length > 0">
+      <div
+        class="team__card scroll-animate fade-up"
+        *ngFor="let member of team; let i = index"
+        [style.transitionDelay]="(i * 0.1) + 's'"
+      >
+        <div class="team__card-top">
+
+          <!-- Photo with fallback -->
+          <div class="team__avatar">
+            <img
+              *ngIf="member.img"
+              [src]="member.img"
+              [alt]="member.name"
+              class="team__avatar-img"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+            />
+            <div
+              class="team__avatar-fallback"
+              [style.display]="member.img ? 'none' : 'flex'"
+            >
+              {{ member.name?.charAt(0)?.toUpperCase() || '?' }}
+            </div>
+          </div>
+
+          <!-- Decorative ring -->
+          <div class="team__card-ring"></div>
+          <div class="team__card-accent"></div>
+        </div>
+
+        <div class="team__card-body">
+          <h4 class="team__name">{{ member.name }}</h4>
+          <span class="team__role">{{ member.role }}</span>
+          <p class="team__desc">{{ member.desc }}</p>
+
+          <!-- Social links (only if set in admin) -->
+          <div class="team__socials" *ngIf="member.linkedin || member.instagram || member.facebook">
+            <a *ngIf="member.linkedin"  [href]="member.linkedin"  target="_blank" rel="noopener" class="team__social team__social--li"  title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a *ngIf="member.instagram" [href]="member.instagram" target="_blank" rel="noopener" class="team__social team__social--ig"  title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a *ngIf="member.facebook"  [href]="member.facebook"  target="_blank" rel="noopener" class="team__social team__social--fb"  title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: CTA
+═══════════════════════════════════════════ -->
+<section class="cta">
+  <div class="cta__bg-grid"></div>
+  <div class="cta__glow"></div>
+
+  <div class="wrap">
+    <div class="cta__wrap scroll-animate fade-up">
+      <div class="cta__pill">
+        <span class="cta__pill-dot"></span>
+        Ready to Travel?
+      </div>
+      <h2 class="cta__h2">Start Your Journey<br>With Us Today</h2>
+      <p class="cta__sub">Join thousands of satisfied travellers who have trusted us with their dream vacations.</p>
+      <div class="cta__btns">
+        <a routerLink="/packages" class="btn-primary">Book Now →</a>
+        <a href="tel:+923156262051" class="btn-wa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          📞 Call Now
+        </a>
+      </div>
+      <div class="cta__trust">
+        <span>✓ LICENCE Certified</span>
+        <span>✓ 20+ Years Trusted</span>
+        <span>✓ 24/7 Support</span>
+      </div>
+    </div>
+  </div>
+</section>

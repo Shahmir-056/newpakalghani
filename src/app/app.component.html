@@ -1,0 +1,22 @@
+<!-- src/app/app.component.html -->
+
+<!-- Splash screen — shown once on first load -->
+<app-splash
+  *ngIf="showSplash"
+  [hiding]="hidingSplash">
+</app-splash>
+
+<!-- Main app — hidden behind splash until it disappears -->
+<ng-container *ngIf="!showSplash">
+
+  <ng-container *ngIf="!isAdminPage">
+    <app-navbar></app-navbar>
+  </ng-container>
+
+  <router-outlet></router-outlet>
+
+  <ng-container *ngIf="!isAdminPage">
+    <app-footer></app-footer>
+  </ng-container>
+
+</ng-container>
