@@ -2,17 +2,17 @@
   "routes": [
     {
       "src": "/sitemap.xml",
-      "headers": {
-        "Content-Type": "application/xml"
-      },
+      "headers": { "Content-Type": "application/xml" },
       "dest": "/sitemap.xml"
     },
     {
       "src": "/robots.txt",
-      "headers": {
-        "Content-Type": "text/plain"
-      },
+      "headers": { "Content-Type": "text/plain" },
       "dest": "/robots.txt"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|json))",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
